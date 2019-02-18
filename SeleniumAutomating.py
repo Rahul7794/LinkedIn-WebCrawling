@@ -1,6 +1,7 @@
 from selenium import webdriver
 from time import sleep
-from Scrapping import profileScraping, addCompanies, linkedinLogin, readFilePath, addYearOfExperince, addLocation
+from Scrapping import profileScraping, addCompanies, linkedinLogin, readFilePath, addYearOfExperince, addLocation,\
+    addingJobTitles, addSkills
 
 driver = webdriver.Chrome('C:/Users/rahul.singh/Downloads/chromedriver_win32/chromedriver')
 userName = readFilePath("linkedinUserName")
@@ -25,7 +26,11 @@ submit_button = driver.find_element_by_xpath('//*[@type="submit"]')
 submit_button.click()
 sleep(2.5)
 
+addingJobTitles(driver)
+
 addLocation(driver)
+
+addSkills(driver)
 
 addCompanies(driver)
 

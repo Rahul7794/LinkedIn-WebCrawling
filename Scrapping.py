@@ -123,18 +123,20 @@ def addYearOfExperince(driver):
     AddYOPButton[0].click()
 
 def addLocation(driver):
-    locationSearch = driver.find_elements_by_xpath("//*[@id='left-rail-facets-region']/ul/li[2]/div/ul/li/span")
-    locationSearch[0].click()
+    locationSearchTab = driver.find_elements_by_xpath("//*[@id='left-rail-facets-region']/ul/li[2]/div/ul/li/span")
+    locationSearchTab[0].click()
     sleep(2.0)
 
-    locationSearch2 = driver.find_elements_by_xpath("//*[@id='left-rail-facets-region']/ul/li[2]/div/form[2]/span[2]/span/input[2]")
-    locationSearch2[0].send_keys(readFilePath("locationToBeAdded"))
-    sleep(2.0)
+    locationToBeAdded = readFilePath("locationToBeAdded")
+    for locations in locationToBeAdded:
+        locationSearch2 = driver.find_elements_by_xpath("//*[@id='left-rail-facets-region']/ul/li[2]/div/form[2]/span[2]/span/input[2]")
+        locationSearch2[0].send_keys(locations)
+        sleep(2.0)
 
 
-    locationSelect = driver.find_elements_by_xpath("//*[@id='left-rail-facets-region']/ul/li[2]/div/form[2]/span[2]/span/div/div/p")
-    locationSelect[0].click()
-    sleep(2.0)
+        locationSelect = driver.find_elements_by_xpath("//*[@id='left-rail-facets-region']/ul/li[2]/div/form[2]/span[2]/span/div/div/p")
+        locationSelect[0].click()
+        sleep(2.0)
 
     currentLocationelement = driver.find_elements_by_xpath("//*[@id='left-rail-facets-region']/ul/li[2]/div/fieldset/ul/li/label")
     currentLocationelement[0].click()
@@ -144,18 +146,43 @@ def addingJobTitles(driver):
     selectJobTitles = driver.find_elements_by_xpath("//*[@id='left-rail-facets']/li/div/ul/li/button")
     selectJobTitles[0].click()
     sleep(2.0)
+    counter =2
+    jobTitle = readFilePath("jobTitle")
+    for jobTitles in jobTitle:
+        typeJobTitles = driver.find_elements_by_xpath("//*[@id='left-rail-facets']/li/div/form[2]/span[2]/span/input")
+        typeJobTitles[0].send_keys(jobTitles)
+        sleep(2.0)
 
+        selectJobTitles = driver.find_elements_by_xpath("//*[@id='left-rail-facets']/li/div/form[2]/span[2]/span/div/div/p")
+        selectJobTitles[0].click()
+        sleep(2.0)
 
-    typeJobTitles = driver.find_elements_by_xpath("//*[@id='left-rail-facets']/li/div/form[2]/span[2]/span/input")
-    typeJobTitles[0].send_keys(readFilePath("jobTitle"))
-    sleep(2.0)
-
-    selectJobTitles = driver.find_elements_by_xpath("//*[@id='left-rail-facets']/li/div/form[2]/span[2]/span/div/div/p")
-    selectJobTitles[0].click()
-    sleep(2.0)
+        addButton = driver.find_elements_by_xpath("//*[@id='left-rail-facets']/li/div/ul/li[{counter}]/button".format(counter=counter))
+        addButton[0].click()
+        sleep(2.0)
+        counter = counter+1
 
     currentJobelement=Select(driver.find_element_by_xpath("//*[@id='left-rail-outlet']/div[2]/ul/li/div/form/select"))
     currentJobelement.select_by_value("C")
     sleep(2.0)
 
 
+def addSkills(driver):
+    listOfSkills = readFilePath("skillsToBeAdded")
+    skillsIdentification = driver.find_elements_by_xpath("//*[@id='left-rail-facets-region']/ul/li[3]/div/ul/li/span")
+    skillsIdentification[0].click()
+    counter=2
+    sleep(2.0)
+    for skills in listOfSkills:
+        enterSkillsClick = driver.find_elements_by_xpath("//*[@id='left-rail-facets-region']/ul/li[3]/div/form[2]/span[2]/span/input")
+        enterSkillsClick[0].send_keys(skills)
+        sleep(2.0)
+
+        skillsSelect = driver.find_elements_by_xpath("//*[@id='left-rail-facets-region']/ul/li[3]/div/form[2]/span[2]/span/div/div/p")
+        skillsSelect[0].click()
+        sleep(2.0)
+
+        addButton = driver.find_elements_by_xpath("//*[@id='left-rail-facets-region']/ul/li[3]/div/ul/li[{number}]/button".format(number=counter))
+        addButton[0].click()
+        sleep(2.0)
+        counter = counter+1
