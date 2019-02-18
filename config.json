@@ -1,0 +1,10 @@
+{
+  "linkedinUserName" : "rahul.singh@valuelabs.com",
+  "linkedinPassword" : "*********",
+  "companiesToBeAdded": ["Tech Mahindra","Wipro Limited","Cognizant", "Infosys", "Tata Consultancy Services", "Capgemini"],
+  "locationToBeAdded": "Hyderabad",
+  "searchKeyWord": "Information Technology OR IT",
+  "jobTitle": "Software Engineer",
+  "YearOfExperienceFrom" : 1,
+  "YearOfExperienceTo": 2
+}
