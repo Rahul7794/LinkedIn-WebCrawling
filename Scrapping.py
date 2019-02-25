@@ -20,7 +20,7 @@ def linkedinLogin(userName, passWord,driver):
 
 
 def profileScraping(links, driver):
-#links =['https://www.linkedin.com/recruiter/profile/411313749,lOfU,CAP?searchController=smartSearch&searchId=7470520893&pos=66&total=4943&searchCacheKey=27a14462-eb94-4dc0-b58e-a32e2c948885%2CXLuM&searchRequestId=e8a0d05f-6dfe-40a5-9678-3b7e32da7b54%2CkhRh&searchSessionId=7470520893&origin=PAGE&memberAuth=411313749%2ClOfU%2CCAP']
+    #links =['https://www.linkedin.com/recruiter/profile/411313749,lOfU,CAP?searchController=smartSearch&searchId=7470520893&pos=66&total=4943&searchCacheKey=27a14462-eb94-4dc0-b58e-a32e2c948885%2CXLuM&searchRequestId=e8a0d05f-6dfe-40a5-9678-3b7e32da7b54%2CkhRh&searchSessionId=7470520893&origin=PAGE&memberAuth=411313749%2ClOfU%2CCAP']
     for link in links:
         try:
             sleep(5)
@@ -71,8 +71,8 @@ def profileScraping(links, driver):
         except Exception as e:
             pass
 
-def addCompanies(driver):
-    listOfCompanies = readFilePath("companiesToBeAdded")
+def addCompanies(driver, Companies_list):
+    listOfCompanies = Companies_list
     companiesIdentification = driver.find_elements_by_xpath("//*[@id='left-rail-facets-region']/ul/li[4]/div/ul/li/span")
     companiesIdentification[0].click()
     counter=2
@@ -104,30 +104,30 @@ def readFilePath(key):
                 return None
         return config
 
-def addYearOfExperince(driver):
+def addYearOfExperince(driver, ExperienceBetween):
     yearsOfExperienceIdentification= driver.find_elements_by_xpath("//*[@id='left-rail-facets-region']/ul/li[10]/div/ul/li/span")
     yearsOfExperienceIdentification[0].click()
     sleep(2.0)
 
     yearsOfExperienceFirstColumn = driver.find_elements_by_xpath("//*[@id='left-rail-facets-region']/ul/li[10]/div/form[2]/div/div/p/input[1]")
     yearsOfExperienceFirstColumn[0].clear()
-    yearsOfExperienceFirstColumn[0].send_keys(readFilePath("YearOfExperienceFrom"))
+    yearsOfExperienceFirstColumn[0].send_keys(ExperienceBetween[0])
     sleep(2.0)
 
     yearsOfExperienceSecondColumn = driver.find_elements_by_xpath("//*[@id='left-rail-facets-region']/ul/li[10]/div/form[2]/div/div/p/input[2]")
     yearsOfExperienceSecondColumn[0].clear()
-    yearsOfExperienceSecondColumn[0].send_keys(readFilePath("YearOfExperienceTo"))
+    yearsOfExperienceSecondColumn[0].send_keys(ExperienceBetween[1])
     sleep(2.0)
 
     AddYOPButton = driver.find_elements_by_xpath("//*[@id='left-rail-facets-region']/ul/li[10]/div/form[2]/div/div/p[2]/button[2]")
     AddYOPButton[0].click()
 
-def addLocation(driver):
+def addLocation(driver, Locations_list):
     locationSearchTab = driver.find_elements_by_xpath("//*[@id='left-rail-facets-region']/ul/li[2]/div/ul/li/span")
     locationSearchTab[0].click()
     sleep(2.0)
 
-    locationToBeAdded = readFilePath("locationToBeAdded")
+    locationToBeAdded = Locations_list
     for locations in locationToBeAdded:
         locationSearch2 = driver.find_elements_by_xpath("//*[@id='left-rail-facets-region']/ul/li[2]/div/form[2]/span[2]/span/input[2]")
         locationSearch2[0].send_keys(locations)
@@ -142,12 +142,12 @@ def addLocation(driver):
     currentLocationelement[0].click()
     sleep(2.0)
 
-def addingJobTitles(driver):
+def addingJobTitles(driver, job_title):
     selectJobTitles = driver.find_elements_by_xpath("//*[@id='left-rail-facets']/li/div/ul/li/button")
     selectJobTitles[0].click()
     sleep(2.0)
     counter =2
-    jobTitle = readFilePath("jobTitle")
+    jobTitle = job_title
     for jobTitles in jobTitle:
         typeJobTitles = driver.find_elements_by_xpath("//*[@id='left-rail-facets']/li/div/form[2]/span[2]/span/input")
         typeJobTitles[0].send_keys(jobTitles)
@@ -167,8 +167,8 @@ def addingJobTitles(driver):
     sleep(2.0)
 
 
-def addSkills(driver):
-    listOfSkills = readFilePath("skillsToBeAdded")
+def addSkills(driver, skill_set):
+    listOfSkills = skill_set
     skillsIdentification = driver.find_elements_by_xpath("//*[@id='left-rail-facets-region']/ul/li[3]/div/ul/li/span")
     skillsIdentification[0].click()
     counter=2
